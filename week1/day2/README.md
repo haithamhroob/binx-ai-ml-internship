@@ -3,8 +3,8 @@
 ## Week 1 - Day 2 : Python for Data Science
 
 ### Summary
-In this notebook, I practiced the core conceptes of python by solving exercises involving functions, list comprhensions, and basic OOP.
-These concepts are essential for writitng clean, reusable code and form the foundation for future data scince tasks. 
+In this notebook, I practiced the core concepts of Python by solving exercises involving functions, list comprehensions, and basic OOP.
+These concepts are essential for writing clean, reusable code and form the foundation for future data science tasks. 
 
 ### Notes
 - Focused on writing clear and reusable code.
