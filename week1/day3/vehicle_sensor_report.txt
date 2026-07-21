@@ -1,0 +1,35 @@
+
+============================================================================================
+                                         Vehicle Sensor Data Report
+============================================================================================
+Driving Condition: Suburban Driving
+
+
+Max Speed: 75.00 km/h
+Mean Speed: 41.55 km/h
+Min Speed: 0.00 km/h
+
+
+Max RPM: 2400.00
+Mean RPM: 1813.64
+Min RPM: 750.00
+
+
+Max Coolant Temp: 88.00 °C
+Mean Coolant Temp: 86.36 °C
+Min Coolant Temp: 85.00 °C
+
+
+Max Engine Load: 52.00 %
+Mean Engine Load: 32.15 %
+Min Engine Load: 18.40 %
+
+
+Number of Speed Records Over Mean Speed: 7
+
+Number of RPM Records Over 2000: 5
+
+Highest Speed Record: Vehicle_Speed_KMH: 75.00 km/h, Engine_RPM: 2150.00 RPM, Throttle_Pos_Pct: 18.50 %, Coolant_Temp_C: 88.00 °C, Engine_Load_Pct: 22.30 %    
+
+speed in m/s: [ 0.    1.39  4.17  7.78 11.67 13.89 14.44 15.28 17.5  20.   20.83]
+
