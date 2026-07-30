@@ -1,15 +1,19 @@
-<h1 style="color:#1565C0;">BinX Tech AI & ML Internship</h1>
+# BinX Tech AI & ML Internship
 
-<h2 style="color:#1976D2;">Week 2 - Day 1 : Descriptive Statistics</h2>
+## Week 2 - Day 1: Descriptive Statistics
 
-<h3 style="color:#F57C00;">Summary</h3>
+### Summary
 
-Applied descriptive statistics to a real vehicle dataset using `Pandas` and `NumPy`. Calculated measures of central tendency and spread, then used the Interquartile Range (`IQR`) method to detect and filter outliers. Finally, visualized the data distribution with a box plot to support the statistical analysis.
+Applied descriptive statistics to a real vehicle dataset using Pandas and NumPy. The analysis included the main measures of central tendency and spread, followed by outlier detection using the Interquartile Range method and a box plot for visualization.
 
-<h3 style="color:#7B1FA2;">Notes</h3>
+### Notes
 
-- Calculated mean, median, variance, and standard deviation for the vehicle speed column.
-- Computed `Q1`, `Q3`, and `IQR` to measure data spread and identify outliers.
-- Filtered abnormal observations using the `IQR` rule.
-- Compared the dataset before and after filtering to understand the impact of outliers.
-- Used a box plot to visualize the distribution of vehicle speed and validate the outlier detection process.
+- Selected the vehicle speed column after inspecting the dataset structure.
+- Handled missing speed values before performing the analysis.
+- Calculated mean, median, mode, range, variance, and standard deviation.
+- Computed Q1, Q3, and the Interquartile Range.
+- Used the IQR rule to flag potential outliers.
+- Calculated the number and percentage of detected outliers.
+- Compared the statistics before and after filtering.
+- Used a box plot to visualize the distribution and potential outliers.
+- Treated outliers as observations that require investigation rather than automatically considering them errors.

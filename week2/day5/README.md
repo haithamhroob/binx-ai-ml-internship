@@ -1,19 +1,32 @@
-# Day 5 — EDA Part 2: Correlation & Data Storytelling
+# BinX Tech AI & ML Internship
 
-## Summary
-This notebook completes the Day 5 EDA workflow for the OBD-II dataset. It uses data cleaning, numeric feature selection, bivariate charts, and correlation analysis to reveal relationships between vehicle sensor measurements.
+## Week 2 - Day 5: Complete Exploratory Data Analysis
 
-Key steps:
-- Load the dataset and inspect structure
-- Remove fully empty rows and columns
-- Select numeric features for analysis
-- Create scatter plots and box plots for bivariate relationships
-- Compute and visualize a correlation matrix
-- Use a pairplot to scan several numeric relationships together
+### Summary
 
-## Notes
-- The notebook focuses on EDA storytelling rather than modeling.
-- Correlation shows association, not causation.
-- `filtered_df` contains only numeric columns and is used for the correlation and pairplot analysis.
-- `ENGINE_RPM` and `SPEED` are the strongest visual relationship in this dataset.
-- The notebook is structured to support a clear narrative: data inspection, cleanup, relationship exploration, and conclusion.
+Completed a narrated exploratory data analysis by combining descriptive statistics, data-quality checks, univariate analysis, outlier investigation, bivariate analysis, correlation, and data storytelling.
+
+### Tasks Completed
+
+- Inspected the dataset structure and data types.
+- Checked missing values and duplicated rows.
+- Calculated descriptive statistics for numerical features.
+- Analyzed numerical distributions using histograms and box plots.
+- Examined the target-class distribution.
+- Detected potential outliers using the IQR method.
+- Documented the decision made for the detected outliers.
+- Performed bivariate analysis using scatter plots and grouped box plots.
+- Calculated and visualized the correlation matrix.
+- Identified the strongest feature relationships.
+- Used a pairplot to scan selected feature relationships.
+- Summarized the findings and their possible effect on future modeling.
+
+### Tools Used
+
+- Python
+- NumPy
+- Pandas
+- Matplotlib
+- Seaborn
+- Jupyter Notebook
+- Git and GitHub
