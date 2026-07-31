@@ -86,6 +86,23 @@ The work included:
 - Using a pairplot to examine selected vehicle measurements.
 - Writing a data-storytelling summary and modeling considerations.
 
+### Week 2 Project — OBD-II Vehicle Data Analysis
+
+Combined the main Week 2 concepts in one independent notebook using the OBD-II vehicle dataset.
+
+The project included:
+
+- Descriptive statistics for vehicle speed.
+- Experimental and conditional probability using speed and engine RPM.
+- Representation of vehicle observations using vectors and matrices.
+- Dot products and matrix multiplication.
+- Distribution analysis using histograms and box plots.
+- Engine RPM outlier detection using the IQR method.
+- Analysis of the relationship between engine RPM and vehicle speed.
+- Comparison of speed across common vehicle models.
+- Correlation analysis and pairplot visualization.
+- Final findings and modeling considerations.
+
 ## Datasets
 
 Different datasets were used during the week:
