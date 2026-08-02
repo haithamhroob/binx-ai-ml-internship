@@ -23,7 +23,6 @@ The dataset was inspected, framed as a binary classification problem, and separa
 ### Tools Used
 
 - Python
-- NumPy
 - Pandas
 - Matplotlib
 - Scikit-learn
