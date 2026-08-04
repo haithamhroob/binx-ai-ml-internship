@@ -114,5 +114,5 @@ The ROC-AUC of approximately **0.996** indicates excellent separation between ma
 
 ### Files
 
-- `day3_logistic_regression.ipynb` — complete narrated Day 3 workflow.
+- `day3.ipynb` — complete narrated Day 3 workflow.
 - `README.md` — summary, results, interpretation, and learning outcomes.
