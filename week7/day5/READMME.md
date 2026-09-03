@@ -10,10 +10,10 @@ During Day 5, the project was advanced by:
 
 * Building a reproducible TF-IDF and Logistic Regression baseline.
 * Partially fine-tuning DistilBERT on IMDb reviews.
-* Selecting the best checkpoint using validation data.
+* Selecting the best training checkpoint using validation data.
 * Tuning the classification threshold.
-* Combining TF-IDF and DistilBERT using a weighted ensemble.
-* Comparing the final model with the baseline, Sprint 1, and the initial Sprint 2 models.
+* Combining TF-IDF and DistilBERT using a weighted soft-voting ensemble.
+* Comparing the final model with the baseline, Sprint 1, and initial Sprint 2 models.
 * Completing the Sprint Review and Retrospective.
 
 ## Learning Objectives
@@ -22,7 +22,7 @@ During Day 5, the project was advanced by:
 * Build a fast and reproducible classical baseline.
 * Apply transfer learning and gradual unfreezing to DistilBERT.
 * Tune model decisions using validation data only.
-* Log experiment configurations, timings, and metrics.
+* Log experiment configurations, timings, and evaluation metrics.
 * Compare Sprint 2 results with previous models.
 * Complete the Sprint Review and Retrospective.
 
@@ -35,7 +35,7 @@ The project uses the IMDb Movie Reviews dataset for binary sentiment classificat
 |     0 | Negative  |
 |     1 | Positive  |
 
-A CPU-friendly subset was used:
+A CPU-friendly experimental subset was used:
 
 | Split      | Samples | Negative | Positive |
 | ---------- | ------: | -------: | -------: |
@@ -45,14 +45,14 @@ A CPU-friendly subset was used:
 
 The same deterministic split used during Day 4 was retained to keep the historical model comparison consistent.
 
-The test set remained isolated during training, checkpoint selection, threshold tuning, and ensemble-weight selection.
+The validation split was used for checkpoint selection, threshold tuning, and ensemble-weight selection. The test split remained untouched until the final evaluations.
 
 ## Experimental Workflow
 
 The experiment followed these stages:
 
 1. Load and clean the IMDb dataset.
-2. Reproduce the Day 4 data split.
+2. Reproduce the Day 4 train, validation, and test splits.
 3. Audit missing values and normalized-text overlap.
 4. Build a TF-IDF and Logistic Regression baseline.
 5. Load the saved Day 4 LSTM and DistilBERT results.
@@ -92,9 +92,9 @@ The reconstructed Week 6-style baseline used:
 * TF-IDF unigram features.
 * Maximum vocabulary size of `20,000`.
 * Logistic Regression.
-* Validation-tuned decision threshold of `0.47`.
+* A validation-tuned decision threshold of `0.47`.
 
-This baseline was fast, reproducible, and provided a strong classical reference for evaluating the added complexity of the Transformer model.
+This baseline provided a fast, reproducible, and interpretable reference for evaluating the added complexity of the Transformer model.
 
 Its test results were:
 
@@ -122,7 +122,7 @@ The initial Transformer model was:
 distilbert-base-uncased-finetuned-sst-2-english
 ```
 
-Before adapting it to the IMDb training subset, it achieved:
+Before adapting the model to the IMDb training subset, it achieved:
 
 * Accuracy: `0.8200`
 * Precision: `0.8411`
@@ -131,7 +131,7 @@ Before adapting it to the IMDb training subset, it achieved:
 
 ## Partial DistilBERT Fine-Tuning
 
-Training the complete DistilBERT model on CPU would be expensive and could increase overfitting on only `4,000` training reviews.
+Training all DistilBERT parameters on CPU would be computationally expensive and could increase overfitting on only `4,000` training reviews.
 
 Gradual unfreezing was therefore used.
 
@@ -140,25 +140,28 @@ Gradual unfreezing was therefore used.
 | Head only  | Pre-classifier and classifier          |      1 |        0.0005 |
 | Last block | Final Transformer block and classifier |      2 |       0.00002 |
 
-The head-only stage produced the best validation result:
+### Validation Results
 
-* Validation Accuracy: `0.8550`
-* Validation Precision: `0.8463`
-* Validation Recall: `0.8683`
-* Validation F1-score: `0.8571`
+| Global Epoch | Stage      | Training Loss | Validation Accuracy | Validation Precision | Validation Recall | Validation F1 |
+| -----------: | ---------- | ------------: | ------------------: | -------------------: | ----------------: | ------------: |
+|            1 | Head only  |        0.3977 |              0.8530 |               0.8612 |            0.8423 |        0.8517 |
+|            2 | Last block |        0.3622 |              0.8480 |               0.8311 |            0.8743 |        0.8521 |
+|            3 | Last block |        0.3449 |              0.8510 |               0.8451 |            0.8603 |    **0.8526** |
 
-Unfreezing the final Transformer block reduced validation F1 slightly. Therefore, the notebook correctly restored the head-only checkpoint instead of keeping the final epoch.
+The best validation checkpoint was produced by the second epoch of the final Transformer-block stage.
 
-After threshold tuning, the selected DistilBERT threshold was `0.51`.
+The total fine-tuning time was approximately `28.09` minutes on CPU.
 
-The partially fine-tuned DistilBERT achieved:
+After validation-based threshold tuning, the selected DistilBERT threshold was `0.30`.
 
-* Accuracy: `0.8450`
-* Precision: `0.8305`
-* Recall: `0.8685`
-* F1-score: `0.8491`
+The partially fine-tuned DistilBERT achieved the following test results:
 
-Fine-tuning improved DistilBERT F1-score from `0.8152` to `0.8491`.
+* Accuracy: `0.8380`
+* Precision: `0.7931`
+* Recall: `0.9163`
+* F1-score: `0.8503`
+
+Fine-tuning improved DistilBERT F1-score from `0.8152` to `0.8503`.
 
 ## Final Ensemble
 
@@ -174,21 +177,24 @@ p_{\text{ensemble}}
 (1-\alpha)p_{\text{TF-IDF}}
 $$
 
-The ensemble weight and threshold were selected using validation data only.
+The ensemble weights and decision threshold were selected using validation data only.
 
 The selected configuration was:
 
 * DistilBERT weight: `0.225`
 * TF-IDF weight: `0.775`
-* Classification threshold: `0.500`
-* Validation F1-score: `0.8975`
+* Classification threshold: `0.495`
+* Validation Accuracy: `0.8990`
+* Validation Precision: `0.8937`
+* Validation Recall: `0.9062`
+* Validation F1-score: `0.8999`
 
 The final ensemble achieved the following test results:
 
 * Accuracy: `0.8920`
-* Precision: `0.8833`
-* Recall: `0.9044`
-* F1-score: `0.8937`
+* Precision: `0.8818`
+* Recall: `0.9064`
+* F1-score: `0.8939`
 
 ## Final Model Comparison
 
@@ -197,20 +203,21 @@ The final ensemble achieved the following test results:
 | Week 6 baseline     | TF-IDF + Logistic Regression    |     0.8520 |     0.8116 |     0.9183 |     0.8617 |
 | Sprint 1            | Text LSTM                       |     0.7880 |     0.7726 |     0.8187 |     0.7950 |
 | Sprint 2 initial    | Pre-trained DistilBERT          |     0.8200 |     0.8411 |     0.7908 |     0.8152 |
-| Sprint 2 fine-tuned | Partially fine-tuned DistilBERT |     0.8450 |     0.8305 |     0.8685 |     0.8491 |
-| Sprint 2 final      | TF-IDF + DistilBERT Ensemble    | **0.8920** | **0.8833** | **0.9044** | **0.8937** |
+| Sprint 2 fine-tuned | Partially fine-tuned DistilBERT |     0.8380 |     0.7931 |     0.9163 |     0.8503 |
+| Sprint 2 final      | TF-IDF + DistilBERT Ensemble    | **0.8920** | **0.8818** | **0.9064** | **0.8939** |
 
 ## Main Findings
 
-* Fine-tuning improved DistilBERT F1-score by `0.0339`.
-* The classical TF-IDF baseline remained stronger than DistilBERT alone.
-* Combining lexical and contextual predictions produced the strongest result.
-* The ensemble improved F1-score over the TF-IDF baseline by `0.0320`.
-* The ensemble improved F1-score over the Sprint 1 LSTM by `0.0987`.
-* The ensemble improved F1-score over the initial DistilBERT by `0.0785`.
-* Validation F1-score was `0.8975`, while test F1-score was `0.8937`.
+* Fine-tuning improved DistilBERT F1-score by `0.0351`.
+* The fine-tuned DistilBERT increased Recall from `0.7908` to `0.9163`.
+* The classical TF-IDF baseline remained stronger than DistilBERT alone in overall F1-score.
+* Combining lexical and contextual predictions produced the strongest final result.
+* The ensemble improved F1-score over the TF-IDF baseline by `0.0322`.
+* The ensemble improved F1-score over the Sprint 1 LSTM by `0.0989`.
+* The ensemble improved F1-score over the initial DistilBERT by `0.0787`.
+* The ensemble reduced F1 error relative to the initial DistilBERT by approximately `42.59%`.
+* Validation F1-score was `0.8999`, while test F1-score was `0.8939`.
 * The small validation-test difference indicates stable generalization.
-* The final ensemble provided a better Precision-Recall balance than TF-IDF alone.
 
 ## Error Analysis
 
@@ -218,11 +225,11 @@ The final ensemble's most confident errors included:
 
 * Reviews containing mixed positive and negative statements.
 * Sarcastic or indirect sentiment.
-* Negative reviews containing many positive descriptive words.
+* Negative reviews containing positive descriptive words.
 * Reviews whose final opinion differed from their opening description.
 * Long reviews where important information may occur after the `128`-token limit.
 
-This analysis demonstrates that high model confidence does not always mean the prediction is correct.
+This analysis demonstrates that high model confidence does not always mean that the prediction is correct.
 
 ## Experiment Logging
 
@@ -232,10 +239,10 @@ The notebook records:
 * Data-integrity checks.
 * Baseline threshold search.
 * DistilBERT training configurations.
-* Training loss for each epoch.
-* Validation metrics for each checkpoint.
+* Training loss for every epoch.
+* Validation metrics for every checkpoint.
 * DistilBERT threshold search.
-* Ensemble weight and threshold search.
+* Ensemble-weight and threshold search.
 * Final model comparison.
 * Confusion matrices.
 * High-confidence classification errors.
@@ -268,21 +275,30 @@ Sprint 2 successfully produced a final model that outperformed:
 * The initial Sprint 2 DistilBERT.
 * The partially fine-tuned DistilBERT.
 
-The final TF-IDF and DistilBERT ensemble achieved the highest test F1-score of `0.8937`.
+The final TF-IDF and DistilBERT ensemble achieved the highest test F1-score of `0.8939`.
 
-The experiment also demonstrated that the most complex standalone model is not automatically the strongest. The best result came from combining the lexical strength of TF-IDF with the contextual understanding of DistilBERT.
+All three acceptance comparisons passed:
+
+| Comparison                               | F1 Difference | Status |
+| ---------------------------------------- | ------------: | ------ |
+| Final ensemble vs reconstructed baseline |       +0.0322 | Passed |
+| Final ensemble vs Sprint 1 LSTM          |       +0.0989 | Passed |
+| Final ensemble vs initial DistilBERT     |       +0.0787 | Passed |
+
+The experiment demonstrated that the most complex standalone model is not automatically the strongest. The best result came from combining the lexical strength of TF-IDF with the contextual understanding of DistilBERT.
 
 ## Sprint Retrospective
 
 ### What Went Well
 
 * All models were evaluated on the same deterministic test subset.
-* The validation set was used for checkpoint and threshold selection.
+* Validation data was used for checkpoint, threshold, and ensemble-weight selection.
 * The test set remained isolated until final evaluation.
 * Gradual unfreezing kept Transformer training practical on CPU.
-* The best checkpoint was restored automatically.
+* The best validation checkpoint was restored automatically.
 * Experiment configurations and metrics were logged clearly.
 * The final ensemble exceeded all previous results.
+* The final validation and test metrics remained close.
 
 ### What Can Be Improved
 
@@ -291,11 +307,12 @@ The experiment also demonstrated that the most complex standalone model is not a
 * Training was completed without GPU acceleration.
 * Only the final Transformer block was tested during gradual unfreezing.
 * A wider hyperparameter search may improve DistilBERT further.
+* The selected DistilBERT threshold reached the lower search boundary of `0.30`, suggesting that a wider threshold range could be evaluated.
 * Model weights were not saved because of their large size.
 
 ### Sprint 3 Action
 
-Use GPU-backed experiments to compare sequence lengths of `128` and `256`, test additional fine-tuning configurations, and evaluate probability calibration before extending the project toward NLP/CV integration.
+Use GPU-backed experiments to compare sequence lengths of `128` and `256`, evaluate additional fine-tuning configurations, widen the DistilBERT threshold search, and study probability calibration before extending the project toward NLP/CV integration.
 
 ## Repository Workflow
 
@@ -312,8 +329,8 @@ Day 5 completed the full Sprint 2 model-development cycle.
 The final TF-IDF and DistilBERT ensemble achieved:
 
 * Accuracy: `0.8920`
-* Precision: `0.8833`
-* Recall: `0.9044`
-* F1-score: `0.8937`
+* Precision: `0.8818`
+* Recall: `0.9064`
+* F1-score: `0.8939`
 
 This was the strongest result across all evaluated models and successfully satisfied the Sprint 2 improvement objective.
