@@ -1,0 +1,4 @@
+Split,Samples,Negative,Positive
+Training,4000,1997,2003
+Validation,1000,499,501
+Test,1000,498,502
