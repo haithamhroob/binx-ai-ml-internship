@@ -1,0 +1,8 @@
+Configuration,Text version,Features,Validation F1
+Minimal text with bigrams,minimal_text,10000,0.8807881773399014
+Add bigrams,classical_text,10000,0.87857847976308
+Sublinear TF,classical_text,10000,0.8754940711462451
+Baseline,classical_text,5000,0.8616290480863592
+Larger vocabulary,classical_text,10000,0.8565815324165029
+Remove rare terms,classical_text,10000,0.8565815324165029
+Remove very common terms,classical_text,10000,0.8565815324165029
