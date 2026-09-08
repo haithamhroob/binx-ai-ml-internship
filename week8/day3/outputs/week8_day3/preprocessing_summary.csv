@@ -1,0 +1,2 @@
+Dataset,Image files,Classes,Target width,Target height,Color conversion,General normalization,MobileNetV2 input range,Resize method,Augmentation
+Oxford-IIIT Pet,7390,37,224,224,BGR to RGB,"[0, 1]","[-1, 1]",Aspect ratio with padding,"rotation, shift, zoom, horizontal flip, brightness"

@@ -1,0 +1,19 @@
+Image,Dataset breed,Rank,ImageNet prediction,Confidence
+Abyssinian_1.jpg,Abyssinian,1,Grey Fox,0.12130203
+Abyssinian_1.jpg,Abyssinian,2,Red Fox,0.05663884
+Abyssinian_1.jpg,Abyssinian,3,Kit Fox,0.05297527
+Persian_183.jpg,Persian,1,Persian Cat,0.959297
+Persian_183.jpg,Persian,2,Angora,0.0028087152
+Persian_183.jpg,Persian,3,Teddy,0.0005686701
+basset_hound_59.jpg,Basset Hound,1,Basset,0.94259626
+basset_hound_59.jpg,Basset Hound,2,Bloodhound,0.009938085
+basset_hound_59.jpg,Basset Hound,3,Beagle,0.0035360525
+havanese_129.jpg,Havanese,1,Tibetan Terrier,0.40541497
+havanese_129.jpg,Havanese,2,Affenpinscher,0.20433992
+havanese_129.jpg,Havanese,3,Lhasa,0.10918965
+pug_200.jpg,Pug,1,Pug,0.91200376
+pug_200.jpg,Pug,2,Brabancon Griffon,0.0033550982
+pug_200.jpg,Pug,3,Pekinese,0.002324728
+yorkshire_terrier_99.jpg,Yorkshire Terrier,1,Silky Terrier,0.47735614
+yorkshire_terrier_99.jpg,Yorkshire Terrier,2,Yorkshire Terrier,0.34214646
+yorkshire_terrier_99.jpg,Yorkshire Terrier,3,Australian Terrier,0.12066805
