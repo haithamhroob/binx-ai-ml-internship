@@ -1,0 +1,4 @@
+filename,true_breed,predicted_breed,confidence,sharpness,brightness,error_category
+havanese_170.jpg,havanese,newfoundland,0.9904695,2050.1169891221075,140.97589937106918,Model weakness: confident confusion between similar breeds
+keeshond_130.jpg,keeshond,leonberger,0.98174185,521.7143960392826,78.53898498498498,Model weakness: confident confusion between similar breeds
+chihuahua_21.jpg,chihuahua,shiba_inu,0.97696257,312.21190232016687,109.01340350877193,Model weakness: confident confusion between similar breeds

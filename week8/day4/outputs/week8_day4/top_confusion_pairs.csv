@@ -1,0 +1,11 @@
+true_breed,predicted_breed,error_count,class_error_percentage
+Bengal,Egyptian Mau,10,33.33
+American Pit Bull Terrier,Staffordshire Bull Terrier,10,33.33
+Ragdoll,Birman,4,13.33
+American Pit Bull Terrier,American Bulldog,4,13.33
+Staffordshire Bull Terrier,American Pit Bull Terrier,4,13.79
+Staffordshire Bull Terrier,American Bulldog,4,13.79
+Russian Blue,British Shorthair,4,13.33
+British Shorthair,Russian Blue,4,13.33
+Persian,Ragdoll,4,13.33
+Birman,Ragdoll,3,10.0
