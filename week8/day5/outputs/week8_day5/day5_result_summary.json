@@ -1,0 +1,16 @@
+{
+  "task": "Oxford-IIIT Pet 37-breed classification",
+  "test_images": 1109,
+  "number_of_classes": 37,
+  "baseline_accuracy": 0.027051397655545536,
+  "model_accuracy": 0.8899909828674482,
+  "top_3_accuracy": 0.9837691614066727,
+  "macro_f1": 0.8896240525221673,
+  "macro_roc_auc_ovr": 0.9978255051894438,
+  "macro_pr_auc": 0.953289556166815,
+  "correct_predictions": 987,
+  "incorrect_predictions": 122,
+  "local_shap_completed": true,
+  "wrong_prediction_shap_completed": true,
+  "global_shap_images": 5
+}
